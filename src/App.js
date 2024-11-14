@@ -26,23 +26,27 @@ function App() {
     console.log(pdfData);
 
     useEffect(() => {
-        socket.on('admin', setIsAdmin(true))
-        socket.on('load-pdf', async ({ base64, page }) => {
-            console.log(base64)
-            setPdfData(base64);
-            setPageNum(page)
-        });
-
-        socket.on('update-page', (page) => {
-            if (!isAdmin && pdfData) {
+        try {
+            socket.on('admin', setIsAdmin(true))
+            socket.on('load-pdf', async ({ base64, page }) => {
+                console.log(base64)
+                setPdfData(base64);
                 setPageNum(page)
-            }
-        });
+            });
 
-        return () => {
-            socket.off('load-pdf');
-            socket.off('update-page');
-        };
+            socket.on('update-page', (page) => {
+                if (!isAdmin && pdfData) {
+                    setPageNum(page)
+                }
+            });
+
+            return () => {
+                socket.off('load-pdf');
+                socket.off('update-page');
+            };
+        } catch (error) {
+            console.log(error);
+        }
     }, []);
 
     const handleFileChange = async (e) => {
@@ -81,16 +85,16 @@ function App() {
         <div className="App">
             <h1>PDF Co Viewer</h1>
             <h2>By Alia</h2>
-          { isAdmin && (
-              <div className='input-container'>
-                <span className='input-label'>Choose your file</span>
-                <input
-                  type="file"
-                  accept="application/pdf"
-                  onChange={handleFileChange}
-              />
-              </div>
-          )}
+            {isAdmin && (
+                <div className='input-container'>
+                    <span className='input-label'>Choose your file</span>
+                    <input
+                        type="file"
+                        accept="application/pdf"
+                        onChange={handleFileChange}
+                    />
+                </div>
+            )}
             {isAdmin && (
                 <div>
                     <button className='pdf-buttons' onClick={() => changePage(-1)} disabled={pageNum <= 1}>
@@ -101,12 +105,12 @@ function App() {
                     </button>
                 </div>
             )}
-            
-                {pdfData && (
-                    <Document file={`data:application/pdf;base64,${pdfData}`}>
-                        <Page pageNumber={pageNum} />
-                    </Document>
-                )}
+
+            {pdfData && (
+                <Document file={`data:application/pdf;base64,${pdfData}`}>
+                    <Page pageNumber={pageNum} />
+                </Document>
+            )}
         </div>
     );
 }
