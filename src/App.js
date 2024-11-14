@@ -96,7 +96,7 @@ function App() {
                 </div>
             )}
             {isAdmin && (
-                <div>
+                <div className='button-container'>
                     <button className='pdf-buttons' onClick={() => changePage(-1)} disabled={pageNum <= 1}>
                         Previous Page
                     </button>

@@ -22,12 +22,20 @@ code {
   flex-direction: column;
   height: 100%;
   width: 100%;
-  padding: 1rem;
+}
+
+h1,h2 {
+  padding-left: 1rem;
 }
 
 .input-container {
   display: flex;
+  padding-left: 1rem;
   padding-bottom: 1rem;
+}
+
+.button-container {
+  padding-left: 1rem;
 }
 
 .input-label {
