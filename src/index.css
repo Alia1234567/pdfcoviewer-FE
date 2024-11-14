@@ -1,0 +1,48 @@
+html, body, #root {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  padding: 1rem;
+}
+
+.input-container {
+  display: flex;
+  padding-bottom: 1rem;
+}
+
+.input-label {
+  padding-right: 1rem;
+}
+
+.pdf-buttons {
+  padding: 8px 1rem;
+  margin: 0 1rem;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.pdf-buttons:hover {
+  background-color: beige;
+}
+
